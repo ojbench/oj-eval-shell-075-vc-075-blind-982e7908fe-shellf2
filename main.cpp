@@ -11,7 +11,7 @@ int main(){
     str c((const char*&&)"hello");
     a = (const char*&&)"world";
     (void)b; (void)c;
-    vector<str> v{str((const char*&&)"1"), str((const char*&&)"2"), str((const char*&&)"3") ) ;
+    vector<str> v{ str((const char*&&)"1"), str((const char*&&)"2"), str((const char*&&)"3") };
     str sep((const char*&&)", ");
     str j = sep.join(v);
     str s = j.slice(0, j.len());
