@@ -39,6 +39,21 @@ public:
 
 	str(const char *&& s_) { assign_cstr(s_); }
 
+	str(const char *s_) { assign_cstr(s_); }
+	str(char *s_) { assign_cstr(s_); }
+
+	str &operator=(const char *s_) {
+		delete[] buf_;
+		assign_cstr(s_);
+		return *this;
+	}
+	str &operator=(char *s_) {
+		delete[] buf_;
+		assign_cstr(s_);
+		return *this;
+	}
+
+
 	str &operator=(const char *&& s_) {
 		if (buf_ != nullptr) {
 			delete[] buf_;
