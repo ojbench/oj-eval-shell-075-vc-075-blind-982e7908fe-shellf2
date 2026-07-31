@@ -2,9 +2,9 @@
 #define STR_HPP
 
 #include <algorithm>
+#include <cstddef>
 #include <cstring>
 #include <vector>
-#include <cstddef>
 
 class str
 {
@@ -36,9 +36,6 @@ public:
 		buf_[1] = '\0';
 		len_ = 1;
 	}
-
-	str(const char *&& s_) { assign_cstr(s_); }
-
 	str(const char *s_) { assign_cstr(s_); }
 	str(char *s_) { assign_cstr(s_); }
 
@@ -49,15 +46,6 @@ public:
 	}
 	str &operator=(char *s_) {
 		delete[] buf_;
-		assign_cstr(s_);
-		return *this;
-	}
-
-
-	str &operator=(const char *&& s_) {
-		if (buf_ != nullptr) {
-			delete[] buf_;
-		}
 		assign_cstr(s_);
 		return *this;
 	}
@@ -83,7 +71,6 @@ public:
 	char &operator[](size_t pos) { return buf_[pos]; }
 	const char &operator[](size_t pos) const { return buf_[pos]; }
 
-
 	size_t len() const { return len_; }
 
 	str join(const std::vector<str> &strs) const {
@@ -104,12 +91,9 @@ public:
 
 		char *p = result.buf_;
 		for (size_t i = 0; i < strs.size(); ++i) {
-			if (i != 0 && len_ > 0) {
+			if (i != 0) {
 				std::memcpy(p, buf_, len_);
 				p += len_;
-			}
-			if (i != 0 && len_ == 0) {
-				// nothing to copy for an empty separator
 			}
 			std::memcpy(p, strs[i].buf_, strs[i].len_);
 			p += strs[i].len_;
