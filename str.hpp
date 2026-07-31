@@ -66,6 +66,8 @@ public:
 	}
 
 	char &operator[](size_t pos) { return buf_[pos]; }
+	const char &operator[](size_t pos) const { return buf_[pos]; }
+
 
 	size_t len() const { return len_; }
 
